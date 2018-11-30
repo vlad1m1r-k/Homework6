@@ -13,8 +13,14 @@ public class Sort implements Runnable {
 
     @Override
     public void run() {
-        for (int i = startPoint; i < array.length; i += step) {
-            
+        for (int i = startPoint + step; i < array.length; i += step) {
+            for (int j = i; j > startPoint; j -= step){
+                if (array[j] < array[j-step]){
+                    int temp = array[j];
+                    array[j] = array[j - step];
+                    array[j - step] = temp;
+                }
+            }
         }
     }
 }
