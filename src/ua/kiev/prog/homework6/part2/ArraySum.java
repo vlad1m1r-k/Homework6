@@ -4,9 +4,9 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ArraySum {
-    private static int[] array = new int[5_000_000];
+    private static int[] array = new int[150_000_000];
     private volatile static AtomicInteger sum = new AtomicInteger(0);
-    private static int elementsPerThread = 500_000;
+    private static int elementsPerThread = 1_000_000;
 
     public static void main(String[] args) throws InterruptedException {
         Random random = new Random();
