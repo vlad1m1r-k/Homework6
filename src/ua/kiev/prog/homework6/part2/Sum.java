@@ -18,6 +18,5 @@ public class Sum implements Runnable {
             sum += array[i];
         }
         ArraySum.setSum(sum);
-        System.out.println("Thread " + Thread.currentThread().getId() + " from " + from + " to " + to + " sum = " + sum);
     }
 }
