@@ -13,7 +13,7 @@ public class CopyDir {
         else {
             Path sourceDir = Paths.get(args[0]);
             Path targetDir = Paths.get(args[1]);
-            if (Files.exists(sourceDir, LinkOption.NOFOLLOW_LINKS) && Files.isDirectory(targetDir, LinkOption.NOFOLLOW_LINKS)){
+            if (Files.exists(sourceDir, LinkOption.NOFOLLOW_LINKS) && Files.isDirectory(sourceDir, LinkOption.NOFOLLOW_LINKS)){
                 if (Files.exists(targetDir, LinkOption.NOFOLLOW_LINKS) && !Files.isDirectory(targetDir, LinkOption.NOFOLLOW_LINKS)){
                     System.out.println("Can not create target dir.");
                 } else {
