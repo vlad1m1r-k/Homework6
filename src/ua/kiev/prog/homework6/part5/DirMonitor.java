@@ -15,7 +15,7 @@ public class DirMonitor {
             dirForMon = new File(args[0]);
             if (!dirForMon.exists() || !dirForMon.isDirectory()) System.out.println("It is not a directory.");
             else {
-                Thread thread = new Thread(() -> startThread());
+                Thread thread = new Thread(() -> threadBody());
                 thread.setDaemon(true);
                 thread.start();
                 System.out.println("Enter for exit.");
@@ -28,7 +28,7 @@ public class DirMonitor {
         return dirForMon;
     }
 
-    private static void startThread(){
+    private static void threadBody() {
         File dirForMon = DirMonitor.getDirForMon();
         List<File> previousList = new ArrayList<File>(Arrays.asList(dirForMon.listFiles()));
         File[] newState;
@@ -40,14 +40,14 @@ public class DirMonitor {
                         newState[i] = null;
                     }
                 }
-                for (File file: newState){
-                    if (file != null){
-                        System.out.println((file.isDirectory()?"Directory \"":"File \"") + file.getName() + "\" added.");
+                for (File file : newState) {
+                    if (file != null) {
+                        System.out.println((file.isDirectory() ? "Directory \"" : "File \"") + file.getName() + "\" added.");
                     }
                 }
-                for (File file: previousList){
-                    if (file != null){
-                        System.out.println((file.isDirectory()?"Directory \"":"File \"") + file.getName() + "\" removed.");
+                for (File file : previousList) {
+                    if (file != null) {
+                        System.out.println((file.isDirectory() ? "Directory \"" : "File \"") + file.getName() + "\" removed.");
                     }
                 }
                 previousList = new ArrayList<File>(Arrays.asList(dirForMon.listFiles()));
