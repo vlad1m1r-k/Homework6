@@ -19,6 +19,8 @@ public class Sort implements Runnable {
                     int temp = array[j];
                     array[j] = array[j - step];
                     array[j - step] = temp;
+                } else {
+                    break;
                 }
             }
         }
