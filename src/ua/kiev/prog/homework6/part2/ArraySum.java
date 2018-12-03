@@ -1,5 +1,7 @@
 package ua.kiev.prog.homework6.part2;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -14,7 +16,10 @@ public class ArraySum {
             array[i] = random.nextInt(100);
         }
         long startTime = System.currentTimeMillis();
-        multiCalc();
+        List<Thread> threadList = multiCalc();
+        for (Thread thread : threadList){
+            thread.join();
+        }
         long endTime = System.currentTimeMillis();
         System.out.println("Array multi thread sum = " + sum + " Time: " + (endTime - startTime) + " ms");
         sum = new AtomicInteger(0);
@@ -35,7 +40,8 @@ public class ArraySum {
         }
         ArraySum.setSum(sum);
     }
-    private static void multiCalc() throws InterruptedException {
+    private static List multiCalc() throws InterruptedException {
+        List<Thread> threadList = new ArrayList<>();
         int index = 0;
         int from;
         int to;
@@ -47,9 +53,10 @@ public class ArraySum {
                 to = index + elementsPerThread;
             }
             Thread thread = new Thread(new Sum(array, from, to));
+            threadList.add(thread);
             thread.start();
-            thread.join();
             index = to + 1;
         } while (index < array.length);
+        return threadList;
     }
 }
